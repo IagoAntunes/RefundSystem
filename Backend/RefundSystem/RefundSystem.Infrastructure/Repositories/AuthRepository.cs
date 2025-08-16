@@ -25,7 +25,7 @@ namespace RefundSystem.Infrastructure.Repositories
                     var roles = await userManager.GetRolesAsync(user);
                     if (roles != null)
                     {
-                        var jwtToken = tokenRepository.CreateJWTToken(user.UserName,user.Email, roles.ToList());
+                        var jwtToken = tokenRepository.CreateJWTToken(user.UserName,user.Email, user.Id, roles.ToList());
                         //var response = new LoginResponseDto
                         //{
                         //    JwtToken = jwtToken,

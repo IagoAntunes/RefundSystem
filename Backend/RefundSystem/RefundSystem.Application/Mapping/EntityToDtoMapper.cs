@@ -17,6 +17,10 @@ namespace RefundSystem.Application.Mapping
             CreateMap<CategoryEntity, CategoryDto>();
             CreateMap<CreateCategoryDto, CategoryEntity>();
             CreateMap<UpdateCategoryDto, CategoryEntity>();
+
+            //Refund
+            CreateMap<CreateRefundDto, RefundEntity>();
+            CreateMap<RefundEntity, RefundDto>();
         }
     }
 }

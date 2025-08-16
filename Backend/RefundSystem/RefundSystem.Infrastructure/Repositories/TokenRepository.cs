@@ -23,7 +23,7 @@ namespace RefundSystem.Infrastructure.Repositories
         }
 
 
-        public string CreateJWTToken(string username, string email, List<string> roles)
+        public string CreateJWTToken(string username, string email, string userId, List<string> roles)
         {
             var identityUser = new IdentityUser
             {
@@ -34,6 +34,7 @@ namespace RefundSystem.Infrastructure.Repositories
             // Create claims
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, userId),
                 new Claim(ClaimTypes.Email, email)
             };
             foreach (var role in roles)

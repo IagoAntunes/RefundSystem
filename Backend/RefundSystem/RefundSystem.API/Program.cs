@@ -48,6 +48,11 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+
+    // Adiciona essa linha para resolver o erro do Swagger com o FromForm.
+    // Isso instrui o Swagger a inferir os parâmetros do corpo da requisição
+    // para APIs que usam [FromForm].
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
 
 builder.Services.AddApplicationServices();

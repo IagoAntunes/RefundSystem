@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RefundSystem.Application.Dtos;
+using RefundSystem.Domain.Dtos;
 
 namespace RefundSystem.Application.Services.Interfaces
 {
     public interface IRefundService
     {
+        Task<List<RefundDto>> GetRefundsByUser(Guid userId);
+        Task<RefundDto> CreateRefund(CreateRefundDto creatRefund, Guid userId);
+        Task<RefundDto?> DeleteRefund(Guid userId,Guid refundId);
     }
 }
