@@ -3,5 +3,6 @@
     public interface IAuthRepository
     {
         Task<bool> Register(string[] roles, string email, string username, string password);  
+        Task<string?> Login(string username, string password);  
     }
 }

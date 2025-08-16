@@ -21,6 +21,7 @@ namespace RefundSystem.Infrastructure
         )
         {
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
 

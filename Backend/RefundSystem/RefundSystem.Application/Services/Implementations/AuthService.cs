@@ -19,6 +19,12 @@ namespace RefundSystem.Application.Services.Implementations
             this.authRepository = authRepository;
         }
 
+        public async Task<string?> Login(LoginAuthDto login)
+        {
+            var result = await authRepository.Login(login.Email, login.Password);
+            return result;
+        }
+
         public async Task<bool> Register(RegisterAuthDto register)
         {
             var result = await authRepository.Register(register.Roles,register.Email, register.Username, register.Password);

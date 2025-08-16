@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RefundSystem.API.Requests.Auth;
+using RefundSystem.API.Responses;
 using RefundSystem.Application.Dtos;
 using RefundSystem.Application.Services.Interfaces;
 
@@ -34,6 +35,23 @@ namespace RefundSystem.API.Controllers
                 return Ok("Success");
             }
             return BadRequest("Failed to register user");
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginAuthRequest request )
+        {
+            var loginAuthDto = mapper.Map<LoginAuthDto>(request);
+            var result = await authService.Login(loginAuthDto);
+            if (result != null)
+            {
+                var response = new LoginResponseDto
+                {
+                    Token = result,
+                };
+                return Ok(response);
+            }
+            return BadRequest("Invalid username or password");
         }
 
     }

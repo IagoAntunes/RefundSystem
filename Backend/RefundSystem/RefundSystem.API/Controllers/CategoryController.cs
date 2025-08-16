@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RefundSystem.API.Requests;
 using RefundSystem.Application.Dtos;
 using RefundSystem.Application.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace RefundSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService categoryService;
@@ -32,6 +32,7 @@ namespace RefundSystem.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequest request)
         {
             var createCategoryDto = mapper.Map<CreateCategoryDto>(request);
@@ -42,6 +43,7 @@ namespace RefundSystem.API.Controllers
 
         [HttpPut]
         [Route("{categoryId:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCategory(
             [FromRoute] Guid categoryId, 
             [FromBody] UpdateCategoryRequest request
@@ -55,6 +57,7 @@ namespace RefundSystem.API.Controllers
 
         [HttpDelete]
         [Route("{categoryId:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid categoryId)
         {
             var result = await categoryService.DeleteCategory(categoryId);

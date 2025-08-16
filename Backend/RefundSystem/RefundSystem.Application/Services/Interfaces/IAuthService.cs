@@ -10,5 +10,6 @@ namespace RefundSystem.Application.Services.Interfaces
     public interface IAuthService
     {
         Task<bool> Register(RegisterAuthDto register);
+        Task<string?> Login(LoginAuthDto login);
     }
 }

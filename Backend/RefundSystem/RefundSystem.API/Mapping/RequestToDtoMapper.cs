@@ -12,6 +12,7 @@ namespace RefundSystem.API.Mapping
             CreateMap<CreateCategoryRequest, CreateCategoryDto>();
             CreateMap<UpdateCategoryRequest, UpdateCategoryDto>();
             CreateMap<RegisterAuthRequest, RegisterAuthDto>();
+            CreateMap<LoginAuthRequest, LoginAuthDto>();
         }
     }
 }
