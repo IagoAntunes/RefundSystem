@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RefundSystem.API.Requests;
 using RefundSystem.Application.Dtos;
-using RefundSystem.Application.Services;
+using RefundSystem.Application.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace RefundSystem.API.Controllers

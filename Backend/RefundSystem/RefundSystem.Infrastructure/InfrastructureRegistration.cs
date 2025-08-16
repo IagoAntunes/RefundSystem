@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RefundSystem.Domain.Repositories;
@@ -19,15 +20,28 @@ namespace RefundSystem.Infrastructure
             IConfiguration configuration
         )
         {
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
 
             services.AddDbContext<RefundSystemDbContext>(
                options => options.UseSqlServer(
-                   configuration.GetConnectionString("RefundSystemConnectionString"),
-                   b => b.MigrationsAssembly("RefundSystem.Infrastructure")
+                   configuration.GetConnectionString("RefundSystemConnectionString")
                )
             );
 
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddDbContext<RefundSystemAuthDbContext>(
+               options => options.UseSqlServer(
+                   configuration.GetConnectionString("RefundSystemAuthConnectionString")
+               )
+            );
+
+            services.AddIdentityCore<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("RefundSystem")
+                .AddEntityFrameworkStores<RefundSystemAuthDbContext>()
+                .AddDefaultTokenProviders();
+
             return services;
         }
     }

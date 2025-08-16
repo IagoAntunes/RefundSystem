@@ -1,7 +1,7 @@
 ﻿using RefundSystem.Application.Dtos;
 using RefundSystem.Domain.Dtos;
 
-namespace RefundSystem.Application.Services
+namespace RefundSystem.Application.Services.Interfaces
 {
     public interface ICategoryService
     {

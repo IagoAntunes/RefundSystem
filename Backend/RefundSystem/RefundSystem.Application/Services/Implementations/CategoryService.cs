@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RefundSystem.Application.Dtos;
+using RefundSystem.Application.Services.Interfaces;
 using RefundSystem.Domain.Dtos;
 using RefundSystem.Domain.Entities;
 using RefundSystem.Domain.Repositories;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RefundSystem.Application.Services
+namespace RefundSystem.Application.Services.Implementations
 {
     public class CategoryService : ICategoryService
     {

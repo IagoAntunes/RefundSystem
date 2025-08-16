@@ -22,6 +22,7 @@ namespace RefundSystem.Infrastructure.Data
                 entity.Property(r => r.Value)
                       .HasColumnType("decimal(18,2)");
             });
+
         }
     }
 
