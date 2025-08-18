@@ -16,7 +16,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddMemoryCache();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ApiResponseFilter>();
