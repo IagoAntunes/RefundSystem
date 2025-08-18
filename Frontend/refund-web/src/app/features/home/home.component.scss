@@ -1,0 +1,94 @@
+@import "../../styles/tokens.scss";
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: $gray400;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+
+    .logo {
+        height: 40px;
+    }
+
+    .user-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        span {
+            font-weight: 700;
+            color: $gray200;
+        }
+
+        .logout-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            color: $gray100;
+
+            &:hover {
+                color: $gray200;
+            }
+        }
+    }
+}
+
+.home-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-card {
+    background-color: $gray500;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: start;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    gap: 20px;
+
+    h1 {
+        font-size: 20px;
+        font-weight: bold;
+        color: $gray100;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: normal;
+        color: $gray200;
+    }
+
+    .row-category-value{
+        display: flex;
+        gap: 16px;
+
+        app-dropdown{
+            flex: 2;
+        }
+
+        app-input{
+            flex: 1;
+        }
+
+    }
+
+
+
+}

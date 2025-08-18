@@ -19,6 +19,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMemoryCache();
+// Program.cs
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200") // Substitua pelo endereço do seu frontend
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ApiResponseFilter>();
@@ -117,6 +128,7 @@ var app = builder.Build();
 
 
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+app.UseCors("AllowSpecificOrigin");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

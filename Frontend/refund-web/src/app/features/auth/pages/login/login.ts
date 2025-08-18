@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
+import { LoginRequest } from '../../request/login.request';
+import { RegisterRequest } from '../../request/register.request';
 @Component({
   selector: 'app-login',
   standalone: true, 
@@ -22,7 +26,11 @@ export class LoginComponent {
   loginForm!: FormGroup;
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   // ngOnInit é o lugar perfeito para inicializar os formulários
   ngOnInit(): void {
@@ -47,14 +55,34 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.isLoginMode) {
       if (this.loginForm.valid) {
-        console.log("Dados de Login:", this.loginForm.value);
-        // Aqui você chamará seu serviço de autenticação
+        const request: LoginRequest = {
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password
+        };
+        this.authService.login(request).subscribe({
+          next: (response) => {
+            console.log('Login bem-sucedido!', response);
+            this.authService.setToken(response.data.token);
+            this.router.navigate(['/dashboard']); 
+          },
+          error: (err) => console.error('Erro no login:', err)
+        });
       }
     } else {
       if (this.registerForm.valid) {
-        // Adicionar validação de senhas iguais aqui
-        console.log("Dados de Cadastro:", this.registerForm.value);
-        // Aqui você chamará seu serviço de registro
+        const request: RegisterRequest = {
+          email: this.registerForm.value.email,
+          username: this.registerForm.value.name, 
+          password: this.registerForm.value.password,
+          roles: ['APPLICANT'] 
+        };
+        this.authService.register(request).subscribe({
+            next: (response) => {
+                console.log('Cadastro bem-sucedido!', response);
+                this.isLoginMode = true;
+            },
+            error: (err) => console.error('Erro no cadastro:', err)
+        });
       }
     }
   }

@@ -1,0 +1,10 @@
+<!-- src/app/shared/components/dropdown/dropdown.component.html -->
+<div class="form-group" [formGroup]="formGroup">
+    <label [for]="controlName">{{ label }}</label>
+    <select [id]="controlName" [formControlName]="controlName" class="form-control">
+        <option [value]="" disabled>{{ placeholder }}</option>
+        <option *ngFor="let option of options" [value]="option.value">
+            {{ option.viewValue }}
+        </option>
+    </select>
+</div>

@@ -1,0 +1,54 @@
+<!-- src/app/features/home/home.component.html -->
+<div class="page-wrapper">
+    <!-- ... seu header ... -->
+
+    <main class="home-container">
+        <div class="content-card">
+            <div class="content-header">
+                <h1>Solicitação de reembolso!</h1>
+                <p>Preencha os campos abaixo para solicitar seu reembolso.</p>
+            </div>
+            
+            <form class="content-form" [formGroup]="refundForm" (ngSubmit)="onSubmit()">
+                <app-input
+                    label="NOME DA SOLICITAÇÃO"
+                    type="text"
+                    controlName="title"
+                    [formGroup]="refundForm"
+                    placeholder="Ex: Almoço com cliente">
+                </app-input>
+
+                <div class="row-category-value">
+                    <app-dropdown
+                        label="CATEGORIA"
+                        controlName="category"
+                        [formGroup]="refundForm"
+                        [options]="categories"
+                        placeholder="Selecione a categoria">
+                    </app-dropdown>
+
+                    <app-input
+                        label="VALOR"
+                        type="number"
+                        controlName="amount"
+                        [formGroup]="refundForm"
+                        placeholder="R$ 0,00">
+                    </app-input>
+                </div>
+
+                <app-file-upload
+                    label="COMPROVANTE"
+                    controlName="attachment"
+                    [formGroup]="refundForm"
+                    placeholder="Anexe o comprovante">
+                </app-file-upload>
+
+                <app-button
+                    label="SOLICITAR REEMBOLSO"
+                    type="submit"
+                    [disabled]="refundForm.invalid">
+                </app-button>
+            </form>
+        </div>
+    </main>
+</div>
