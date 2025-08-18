@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { InputComponent } from '../../shared/components/input/input.component';
-import { ButtonComponent } from '../../shared/components/button/button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DropdownComponent, DropdownOption } from '../../shared/components/dropdown/dropdown.component';
-import { CategoryService } from './services/category.service';
+
 import { map } from 'rxjs';
-import { Category } from '../../interfaces/category'; 
-import { FileUploadComponent } from '../../shared/components/file-upload/file-upload.component';
-import { RefundService } from './services/refund.service';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { DropdownComponent, DropdownOption } from '../../../shared/components/dropdown/dropdown.component';
+import { FileUploadComponent } from '../../../shared/components/file-upload/file-upload.component';
+import { AuthService } from '../../auth/auth.service';
+import { CategoryService } from '../services/category.service';
+import { RefundService } from '../services/refund.service';
+import { Category } from '../../../interfaces/category';
+
 
 
 @Component({
@@ -24,10 +26,10 @@ import { RefundService } from './services/refund.service';
         DropdownComponent,
         FileUploadComponent
     ],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    templateUrl: './home-applicant.component.html',
+    styleUrls: ['./home-applicant.component.scss']
 })
-export class HomeComponent {
+export class HomeApplicant {
     refundForm!: FormGroup;
     categories: DropdownOption[] = [];
     constructor(

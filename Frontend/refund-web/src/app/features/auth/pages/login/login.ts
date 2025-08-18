@@ -62,8 +62,12 @@ export class LoginComponent {
         this.authService.login(request).subscribe({
           next: (response) => {
             console.log('Login bem-sucedido!', response);
-            this.authService.setToken(response.data.token);
-            this.router.navigate(['/dashboard']); 
+            if (response && response.data && response.data.token) {
+              this.authService.setToken(response.data.token);
+              this.authService.redirectUserBasedOnRole();
+            } else {
+              console.error('Token não encontrado na resposta do login.');
+            }
           },
           error: (err) => console.error('Erro no login:', err)
         });

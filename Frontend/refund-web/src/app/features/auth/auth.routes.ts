@@ -3,7 +3,12 @@ import { LoginComponent } from './pages/login/login';
 
 export const AUTH_ROUTES: Routes = [
     {
-        path: '',
-        component: LoginComponent
+    path: 'login',
+    component: LoginComponent
+    },
+    {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
     }
 ];

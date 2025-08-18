@@ -1,10 +1,24 @@
 // src/app/features/home/home.routes.ts
 import { Routes } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
+import { authGuard } from '../auth/auth.guard';
+import { HomeApplicant } from './applicant-home/home-applicant.component';
 
 export const HOME_ROUTES: Routes = [
+  {
+    // Rota para a home do solicitante (applicant)
+    path: 'my-refunds',
+    component: HomeApplicant,
+    canActivate: [authGuard]
+  },
+  // TODO: Adicionar a rota para a home do aprovador (approver)
+  // {
+  //   path: 'approvals',
+  //   component: ApproverHomeComponent,
+  //   canActivate: [authGuard]
+  // },
     {
     path: '',
-    component: HomeComponent
+    redirectTo: 'my-refunds', // Redireciona a rota vazia do dashboard
+    pathMatch: 'full'
     }
 ];
