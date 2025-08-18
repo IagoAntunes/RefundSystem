@@ -1,0 +1,97 @@
+@import "../../../../styles/tokens.scss";
+
+.full-screen-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.auth-card {
+    background-color: $gray500;
+    padding: 32px 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 460px;
+    box-sizing: border-box;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+
+    label {
+    display: block;
+    font-size: 14px;
+    color: var(--label-color);
+    margin-bottom: 8px;
+    font-weight: 500;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+    outline: none;
+    border-color: var(--border-color-focus);
+    }
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.form-actions {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: center;
+
+    // Botão principal
+    &.btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+
+        &:hover {
+            background-color: var(--primary-color-hover);
+        }
+    }
+
+    // Botão secundário (link)
+    &.btn-link {
+    background-color: transparent;
+    color: var(--primary-color);
+    font-weight: normal;
+
+    &:hover {
+        text-decoration: underline;
+    }
+    }
+}
+

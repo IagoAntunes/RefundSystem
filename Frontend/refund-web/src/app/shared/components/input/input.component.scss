@@ -1,0 +1,23 @@
+@import "../../../styles/tokens.scss";
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 16px;
+    font-size: 1rem;
+    border: 3px solid #CDD5D2;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: transparent;
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 12px;
+    color: $gray200;
+    text-transform: uppercase;
+}

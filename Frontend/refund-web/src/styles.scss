@@ -1,0 +1,9 @@
+@import "app/styles/tokens.scss";
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: $gray400; 
+}

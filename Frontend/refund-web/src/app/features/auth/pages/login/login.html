@@ -1,0 +1,80 @@
+<div class="full-screen-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <img src="logo.svg" alt="Logo">
+        </div>
+
+        <!-- Formulário de Login -->
+        <form *ngIf="isLoginMode" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <app-input
+                label="Email"
+                type="email"
+                controlName="email"
+                [formGroup]="loginForm"
+                placeholder="Digite seu email">
+            </app-input>
+
+            <app-input
+                label="Senha"
+                type="password"
+                controlName="password"
+                [formGroup]="loginForm"
+                placeholder="Digite sua senha">
+            </app-input>
+        </form>
+
+        <!-- Formulário de Cadastro -->
+        <form *ngIf="!isLoginMode" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <app-input
+                label="Nome"
+                type="text"
+                controlName="name"
+                [formGroup]="registerForm"
+                placeholder="Digite seu nome completo">
+            </app-input>
+            
+            <app-input
+                label="Email"
+                type="email"
+                controlName="email"
+                [formGroup]="registerForm"
+                placeholder="Digite seu email">
+            </app-input>
+
+            <app-input
+                label="Senha"
+                type="password"
+                controlName="password"
+                [formGroup]="registerForm"
+                placeholder="Crie uma senha">
+            </app-input>
+
+            <app-input
+                label="Confirme a Senha"
+                type="password"
+                controlName="confirmPassword"
+                [formGroup]="registerForm"
+                placeholder="Confirme sua senha">
+            </app-input>
+        </form>
+
+        <div class="form-actions">
+            <app-button
+                type="submit"
+                variant="primary"
+                [label]="isLoginMode ? 'Entrar' : 'Cadastrar'"
+                (buttonClick)="onSubmit()"
+                [disabled]="isLoginMode ? loginForm.invalid : registerForm.invalid"
+            >
+            </app-button>
+
+            <app-button
+                type="button"
+                variant="link"
+                [label]="isLoginMode ? 'Criar conta' : 'Já tenho uma conta'"
+                (buttonClick)="toggleMode()"
+            >
+            </app-button>
+        </div>
+    </div>
+</div>

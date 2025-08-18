@@ -1,0 +1,11 @@
+<div class="form-group" [formGroup]="formGroup">
+    <label [for]="controlName">{{ label }}</label>
+    <input
+        [type]="type"
+        [id]="controlName"
+        [name]="controlName"
+        [formControlName]="controlName"
+        [placeholder]="placeholder"
+        class="form-control"
+    />
+</div>
