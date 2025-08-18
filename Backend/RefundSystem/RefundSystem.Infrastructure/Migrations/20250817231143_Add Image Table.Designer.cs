@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RefundSystem.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using RefundSystem.Infrastructure.Data;
 namespace RefundSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(RefundSystemDbContext))]
-    partial class RefundSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250817231143_Add Image Table")]
+    partial class AddImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

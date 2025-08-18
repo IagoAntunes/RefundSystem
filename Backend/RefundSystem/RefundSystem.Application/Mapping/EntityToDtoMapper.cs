@@ -21,6 +21,9 @@ namespace RefundSystem.Application.Mapping
             //Refund
             CreateMap<CreateRefundDto, RefundEntity>();
             CreateMap<RefundEntity, RefundDto>();
+
+            //Image
+            CreateMap<ImageDto, ImageEntity>().ReverseMap();
         }
     }
 }

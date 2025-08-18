@@ -13,24 +13,31 @@ namespace RefundSystem.Application.Services.Implementations
     {
         private readonly IRefundRepository refundRepository;
         private readonly IWebHostEnvironment environment;
+        private readonly IImageService imageService;
         private readonly IMapper mapper;
 
-        public RefundService(IRefundRepository refundRepository, IMapper mapper, IWebHostEnvironment environment)
+        public RefundService(
+            IRefundRepository refundRepository,
+            IMapper mapper,
+            IWebHostEnvironment environment,
+            IImageService imageService
+            )
         {
             this.refundRepository = refundRepository;
             this.mapper = mapper;
             this.environment = environment;
+            this.imageService = imageService;
         }
 
         public IWebHostEnvironment Environment { get; }
 
         public async Task<RefundDto> CreateRefund(CreateRefundDto createRefund, Guid userId)
         {
-            var filePath = await SaveFileAsync(createRefund.File,userId);
+            var image = await imageService.UploadImageAsync(createRefund.File, Guid.NewGuid(), userId, createRefund.File.FileName);
 
             var refundEntity = mapper.Map<RefundEntity>(createRefund);
 
-            refundEntity.FilePath = filePath;
+            refundEntity.ImageId = image.Id;
             refundEntity.UserId = userId;
             var result = await refundRepository.CreateRefund(refundEntity);
             var refundDto = mapper.Map<RefundDto>(result);
@@ -55,25 +62,7 @@ namespace RefundSystem.Application.Services.Implementations
             return refundsDto;
         }
 
-        private async Task<string> SaveFileAsync(IFormFile file, Guid userId)
-        {
-            if (file == null || file.Length == 0)
-            {
-                return null;
-            }
 
-            var uploadsFolder = Path.Combine(environment.ContentRootPath, "Images");
-
-            var uniqueFileName = $"{userId}_{Guid.NewGuid()}_{file.FileName}";
-            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-
-            return Path.Combine("Images", uniqueFileName);
-        }
 
     }
 }

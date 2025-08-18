@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RefundSystem.API.Requests;
 using RefundSystem.Application.Dtos;
@@ -46,8 +47,8 @@ namespace RefundSystem.API.Controllers
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var createRefundDto = mapper.Map<CreateRefundDto>(request);
-            await service.CreateRefund(createRefundDto, userId);
-            return Ok(userId);
+            var createdRefund = await service.CreateRefund(createRefundDto, userId);
+            return CreatedAtAction(nameof(GetAll), new { id = createdRefund.Id }, createdRefund);
         }
 
         [HttpDelete]

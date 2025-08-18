@@ -24,6 +24,7 @@ namespace RefundSystem.Infrastructure
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IRefundRepository, RefundRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
 
             services.AddDbContext<RefundSystemDbContext>(

@@ -12,6 +12,7 @@ namespace RefundSystem.Infrastructure.Data
 
         public DbSet<CategoryEntity> Categories { get; set; }
         public DbSet<RefundEntity> Refunds { get; set; }
+        public DbSet<ImageEntity> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

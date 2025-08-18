@@ -13,6 +13,7 @@ namespace RefundSystem.Application
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IRefundService, RefundService>();
+            services.AddScoped<IImageService, ImageService>();
             return services;
         }
     }

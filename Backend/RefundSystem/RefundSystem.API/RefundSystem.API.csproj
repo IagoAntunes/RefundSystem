@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RefundSystem.Application\RefundSystem.Application.csproj" />
+    <ProjectReference Include="..\RefundSystem.Core\RefundSystem.Core.csproj" />
     <ProjectReference Include="..\RefundSystem.Domain\RefundSystem.Domain.csproj" />
     <ProjectReference Include="..\RefundSystem.Infrastructure\RefundSystem.Infrastructure.csproj" />
   </ItemGroup>

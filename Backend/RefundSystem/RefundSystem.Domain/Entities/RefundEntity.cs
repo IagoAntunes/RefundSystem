@@ -12,7 +12,7 @@ namespace RefundSystem.Domain.Entities
         public string Name { get; set; }
         public decimal Value { get; set; }
         public int Status { get; set; }
-        public string FilePath { get; set; }
+        public Guid ImageId { get; set; }
         public Guid CategoryId { get; set; }
         public Guid UserId { get; set; }
 
