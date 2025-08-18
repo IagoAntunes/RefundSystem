@@ -31,6 +31,18 @@ namespace RefundSystem.Application.Services.Implementations
 
         public IWebHostEnvironment Environment { get; }
 
+        public async Task<RefundDto?> ChangeStatus(Guid refundId, int newStatus)
+        {
+            var result = await refundRepository.ChangeStatus(refundId, newStatus);
+            if(result == null)
+            {
+                return null;
+            }
+
+            var refundDto = mapper.Map<RefundDto>(result);
+            return refundDto;
+        }
+
         public async Task<RefundDto> CreateRefund(CreateRefundDto createRefund, Guid userId)
         {
             var image = await imageService.UploadImageAsync(createRefund.File, Guid.NewGuid(), userId, createRefund.File.FileName);

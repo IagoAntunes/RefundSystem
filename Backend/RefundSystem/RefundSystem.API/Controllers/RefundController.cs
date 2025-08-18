@@ -68,6 +68,24 @@ namespace RefundSystem.API.Controllers
             return CreatedAtAction(nameof(GetAll), new { id = createdRefund.Id }, createdRefund);
         }
 
+        [HttpPost()]
+        [Route("Status/{id:guid}")]
+        public async Task<IActionResult> ChangeStatus([FromRoute] Guid id, [FromBody] ChangeRefundStatusRequest request)
+        {
+            if (!User.IsInRole("Admin") && !User.IsInRole("Approver"))
+            {
+                return Forbid();
+            }
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var updatedRefund = await service.ChangeStatus(id, request.Status);
+            if (updatedRefund == null)
+            {
+                return NotFound();
+            }
+            ClearUserCache(userId);
+            return Ok(updatedRefund);
+        }
+
         [HttpDelete]
         [Route("{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)

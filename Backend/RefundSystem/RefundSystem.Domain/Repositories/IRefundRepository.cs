@@ -1,4 +1,5 @@
-﻿using RefundSystem.Domain.Entities;
+﻿using RefundSystem.Domain.Dtos;
+using RefundSystem.Domain.Entities;
 
 
 namespace RefundSystem.Domain.Repositories
@@ -8,5 +9,6 @@ namespace RefundSystem.Domain.Repositories
         Task<List<RefundEntity>> GetRefundsByUser(Guid userId);
         Task<RefundEntity> CreateRefund(RefundEntity refund);
         Task<RefundEntity?> DeleteRefund(Guid userId, Guid refundId);
+        Task<RefundEntity?> ChangeStatus(Guid refundId, int newStatus);
     }
 }

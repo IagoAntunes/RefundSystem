@@ -13,6 +13,22 @@ namespace RefundSystem.Infrastructure.Repositories
         {
             this.dbContext = dbContext;
         }
+
+        public async Task<RefundEntity?> ChangeStatus(Guid refundId, int newStatus)
+        {
+            var refundFinded = await dbContext.Refunds
+                .Where(r => r.Id == refundId)
+                .FirstOrDefaultAsync();
+            if (refundFinded == null)
+            {
+                return null;
+            }
+            refundFinded.Status = newStatus;
+            dbContext.Refunds.Update(refundFinded);
+            await dbContext.SaveChangesAsync();
+            return refundFinded;
+        }
+
         public async Task<RefundEntity> CreateRefund(RefundEntity refund)
         {
             var result = await dbContext.Refunds.AddAsync(refund);
