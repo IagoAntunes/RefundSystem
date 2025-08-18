@@ -7,12 +7,14 @@ using Microsoft.OpenApi.Models;
 using RefundSystem.API.Mapping;
 using RefundSystem.API.Middlewares;
 using RefundSystem.API.Responses;
+using RefundSystem.API.Validators;
 using RefundSystem.Application;
 using RefundSystem.Application.Mapping;
 using RefundSystem.Application.Services;
 using RefundSystem.Infrastructure;
 using System.Text;
-
+using FluentValidation; 
+using FluentValidation.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,16 +28,20 @@ builder.Services.AddControllers(options =>
     options.InvalidModelStateResponseFactory = context =>
     {
         var errorMessages = context.ModelState.Values
-                                .SelectMany(v => v.Errors)
-                                .Select(e => e.ErrorMessage)
-                                .ToList();
+                               .SelectMany(v => v.Errors)
+                               .Select(e => e.ErrorMessage)
+                               .ToList();
 
         var errorResponse = ApiResponse<object>.CreateError(errorMessages);
 
         return new BadRequestObjectResult(errorResponse);
     };
 });
-;
+
+// Registra o FluentValidation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateRefundRequestValidator>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
