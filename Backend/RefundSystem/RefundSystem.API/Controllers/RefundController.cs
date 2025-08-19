@@ -37,17 +37,17 @@ namespace RefundSystem.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var cacheKey = $"refunds_user_{userId}";
-            if (memoryCache.TryGetValue(cacheKey, out var cachedResult))
-            {
-                return Ok(cachedResult);
-            }
+            //var cacheKey = $"refunds_user_{userId}";
+            //if (memoryCache.TryGetValue(cacheKey, out var cachedResult))
+            //{
+            //    return Ok(cachedResult);
+            //}
 
-            var result = await service.GetRefundsByUser(userId);
+            var result = await service.GetAllRefunds();
 
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromMinutes(5));
-            memoryCache.Set(cacheKey, result, cacheEntryOptions);
+            //var cacheEntryOptions = new MemoryCacheEntryOptions()
+            //    .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+            //memoryCache.Set(cacheKey, result, cacheEntryOptions);
 
             return Ok(result);
         }

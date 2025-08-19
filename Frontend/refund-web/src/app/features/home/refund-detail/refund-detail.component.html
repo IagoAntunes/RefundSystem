@@ -1,0 +1,43 @@
+<div class="page-wrapper">
+    <main class="home-container">
+        <div class="content-card">
+            <h1>Detalhes da Solicitação</h1>
+            <form [formGroup]="detailForm">
+            <app-input
+                label="NOME DA SOLICITAÇÃO"
+                controlName="name"
+                [formGroup]="detailForm">
+            </app-input>
+
+            <div class="row-category-value">
+                <app-dropdown
+                label="CATEGORIA"
+                controlName="category"
+                [formGroup]="detailForm"
+                [options]="categories">
+                </app-dropdown>
+
+                <app-input
+                label="VALOR"
+                type="number"
+                controlName="value"
+                [formGroup]="detailForm">
+                </app-input>
+            </div>
+            </form>
+
+            <button class="receipt-button" (click)="openReceipt()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Abrir Comprovante</span>
+            </button>
+
+            <div class="divider"></div>
+
+            <app-button
+                    label="VOLTAR"
+                    variant="secondary"
+                    (buttonClick)="goBack()">
+            </app-button>
+        </div>
+    </main>
+</div>

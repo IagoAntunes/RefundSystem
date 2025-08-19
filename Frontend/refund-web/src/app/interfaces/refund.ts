@@ -3,6 +3,11 @@ export interface RefundResponse {
     data: Refund;
 }
 
+export interface RefundListResponse {
+    success: boolean;
+    data: Refund[];
+}
+
 export interface Refund {
     id: string;
     name: string;
@@ -11,5 +16,6 @@ export interface Refund {
     imageId: string;
     categoryId: string;
     userId: string;
-    category: null;
+    category: any | null;
+    userName: string;
 }

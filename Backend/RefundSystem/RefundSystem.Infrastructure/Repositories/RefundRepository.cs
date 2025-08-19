@@ -9,7 +9,9 @@ namespace RefundSystem.Infrastructure.Repositories
     {
         private readonly RefundSystemDbContext dbContext;
 
-        public RefundRepository(RefundSystemDbContext dbContext)
+        public RefundRepository(
+            RefundSystemDbContext dbContext
+            )
         {
             this.dbContext = dbContext;
         }
@@ -50,6 +52,14 @@ namespace RefundSystem.Infrastructure.Repositories
             await dbContext.SaveChangesAsync();
 
             return refundFinded;
+        }
+
+        public async Task<List<RefundEntity>> GetAllRefunds()
+        {
+            var result = await dbContext.Refunds.Include(r => r.Category)
+                                                .ToListAsync();
+
+            return result;
         }
 
         public async Task<List<RefundEntity>> GetRefundsByUser(Guid userId)

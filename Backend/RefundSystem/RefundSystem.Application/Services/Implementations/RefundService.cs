@@ -14,19 +14,22 @@ namespace RefundSystem.Application.Services.Implementations
         private readonly IRefundRepository refundRepository;
         private readonly IWebHostEnvironment environment;
         private readonly IImageService imageService;
+        private readonly IAuthService authService;
         private readonly IMapper mapper;
 
         public RefundService(
             IRefundRepository refundRepository,
             IMapper mapper,
             IWebHostEnvironment environment,
-            IImageService imageService
-            )
+            IImageService imageService,
+            IAuthService authService
+        )
         {
             this.refundRepository = refundRepository;
             this.mapper = mapper;
             this.environment = environment;
             this.imageService = imageService;
+            this.authService = authService;
         }
 
         public IWebHostEnvironment Environment { get; }
@@ -67,14 +70,26 @@ namespace RefundSystem.Application.Services.Implementations
             return refundDto;
         }
 
+        public async Task<List<RefundDto>> GetAllRefunds()
+        {
+            var result = await refundRepository.GetAllRefunds();
+            var refundsDto = mapper.Map<List<RefundDto>>(result);
+
+            foreach (var refund in refundsDto)
+            {
+                var userInfo = await authService.GetUserInfo(refund.UserId);
+                refund.UserName = userInfo?.Name ?? "Unknown";
+            }
+
+            return refundsDto;
+        }
+
         public async Task<List<RefundDto>> GetRefundsByUser(Guid userId)
         {
             var result = await refundRepository.GetRefundsByUser(userId);
             var refundsDto = mapper.Map<List<RefundDto>>(result);
             return refundsDto;
         }
-
-
 
     }
 }

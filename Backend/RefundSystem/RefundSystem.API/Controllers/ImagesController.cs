@@ -34,7 +34,7 @@ namespace RefundSystem.API.Controllers
             {
                 return NotFound();
             }
-            if (User.IsInRole("ADMIN") || User.IsInRole("APPROVER"))
+            if (User.IsInRole("Admin") || User.IsInRole("Approver"))
             {
                 var fileBytes = await System.IO.File.ReadAllBytesAsync(image.FilePath);
 

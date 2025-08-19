@@ -1,9 +1,5 @@
 ﻿using RefundSystem.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RefundSystem.Domain.Dtos;
 
 namespace RefundSystem.Application.Services.Interfaces
 {
@@ -11,5 +7,6 @@ namespace RefundSystem.Application.Services.Interfaces
     {
         Task<bool> Register(RegisterAuthDto register);
         Task<string?> Login(LoginAuthDto login);
+        Task<UserInfoDto?> GetUserInfo(Guid userId);
     }
 }

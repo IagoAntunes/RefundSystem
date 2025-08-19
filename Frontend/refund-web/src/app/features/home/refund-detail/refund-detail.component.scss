@@ -1,0 +1,96 @@
+@import "../../../styles/tokens.scss";
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: $gray400;
+}
+
+.home-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-card {
+    background-color: $gray500;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: start;
+    width: 100%;
+    max-width: 600px; /* Mesmo tamanho da tela do applicant */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h1 {
+        font-size: 20px;
+        font-weight: bold;
+        color: $gray100;
+        margin: 0;
+    }
+
+    .row-category-value {
+        display: flex;
+        gap: 16px;
+
+        app-dropdown {
+            flex: 2;
+        }
+
+        app-input {
+            flex: 1;
+        }
+    }
+}
+
+.receipt-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: transparent;
+    border: 2px solid $green100;
+    color: $green100;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+
+    svg {
+        stroke: $green100;
+        transition: stroke 0.2s;
+    }
+
+    &:hover {
+        background-color: $green100;
+        color: white;
+
+        svg {
+            stroke: white;
+        }
+    }
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: $gray400;
+    margin: 1rem 0;
+}
+
+::ng-deep .btn-secondary {
+    background-color: $green100;
+    border: 2px solid $gray300;
+    color: $gray200;
+
+    &:hover {
+        background-color: $green200;
+        color: $gray100;
+    }
+}

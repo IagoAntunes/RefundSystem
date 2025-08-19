@@ -44,7 +44,8 @@ namespace RefundSystem.Application.Services.Implementations
 
         public async Task<ImageDto?> UploadImageAsync(IFormFile file, Guid id, Guid userId, string name)
         {
-            var filePath = await SaveFileToDiskAsync(file);
+            var idImage = Guid.NewGuid();
+            var filePath = await SaveFileToDiskAsync(file, idImage);
             if (filePath == null)
             {
                 return null;
@@ -52,7 +53,7 @@ namespace RefundSystem.Application.Services.Implementations
 
             var imageDto = new ImageDto
             {
-                Id = Guid.NewGuid(),
+                Id = idImage,
                 UserId = userId,
                 Name = name,
                 FilePath = filePath,
@@ -71,7 +72,7 @@ namespace RefundSystem.Application.Services.Implementations
         /// <summary>
         /// Trabalhador: Responsável APENAS por salvar o arquivo no disco e retornar seus metadados.
         /// </summary>
-        private async Task<string?> SaveFileToDiskAsync(IFormFile file)
+        private async Task<string?> SaveFileToDiskAsync(IFormFile file, Guid idImage)
         {
             if (file == null || file.Length == 0)
             {
@@ -86,7 +87,7 @@ namespace RefundSystem.Application.Services.Implementations
 
             // O NOME DO ARQUIVO AGORA É SÓ ISSO! Simples, limpo e único.
             var fileExtension = Path.GetExtension(file.FileName);
-            var storedFileName = $"{Guid.NewGuid()}{fileExtension}";
+            var storedFileName = $"{idImage}{fileExtension}";
 
             var filePath = Path.Combine(uploadsFolder, storedFileName);
 

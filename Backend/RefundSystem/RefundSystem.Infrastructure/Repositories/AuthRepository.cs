@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RefundSystem.Domain.Dtos;
 using RefundSystem.Domain.Repositories;
 
 namespace RefundSystem.Infrastructure.Repositories
@@ -12,6 +13,21 @@ namespace RefundSystem.Infrastructure.Repositories
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
+        }
+
+        public async Task<UserInfoDto?> GetUserInfo(Guid userId)
+        {
+            var user = await userManager.FindByIdAsync(userId.ToString());
+            if(user == null)
+            {
+                return null;
+            }
+            var userInfo = new UserInfoDto
+            {
+                Email = user.Email,
+                Name = user.UserName
+            };
+            return userInfo;
         }
 
         public async Task<string?> Login(string email, string password)

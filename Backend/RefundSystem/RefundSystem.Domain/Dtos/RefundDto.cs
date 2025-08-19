@@ -18,5 +18,7 @@ namespace RefundSystem.Domain.Dtos
         public Guid UserId { get; set; }
 
         public CategoryDto Category { get; set; }
+
+        public string UserName { get; set; }
     }
 }

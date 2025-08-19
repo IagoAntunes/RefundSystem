@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using RefundSystem.Application.Dtos;
 using RefundSystem.Application.Services.Interfaces;
+using RefundSystem.Domain.Dtos;
 using RefundSystem.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace RefundSystem.Application.Services.Implementations
         public AuthService(IAuthRepository authRepository)
         {
             this.authRepository = authRepository;
+        }
+
+        public async Task<UserInfoDto?> GetUserInfo(Guid userId)
+        {
+            var result = await authRepository.GetUserInfo(userId);
+            return result;
         }
 
         public async Task<string?> Login(LoginAuthDto login)
